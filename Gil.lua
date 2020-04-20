@@ -24,13 +24,15 @@ function Display_Box()
   if gil ~= nil then
     
   new_text = "Gil: " .. comma_value(gil) .. "\n"
-  
+  Timer = os.clock()
+    
   end
 
     if new_text ~= nil then
     
       text_box:text(new_text)
       text_box:visible(true)
+      Timer = os.clock()
     
     end
   
