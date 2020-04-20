@@ -24,7 +24,6 @@ function Display_Box()
   if gil ~= nil then
     
   new_text = "Gil: " .. comma_value(gil) .. "\n"
-  Timer = os.clock()
     
   end
 
@@ -32,7 +31,6 @@ function Display_Box()
     
       text_box:text(new_text)
       text_box:visible(true)
-      Timer = os.clock()
     
     end
   
@@ -54,11 +52,13 @@ windower.register_event('prerender', function()
   if os.clock() - Timer > 5 then
     
     gil = Get_Gil()
-    
+    Timer = os.clock()
+      
     if gil ~= nil then
       
       Display_Box()
-      
+      Timer = os.clock()
+        
     end
     
   end
