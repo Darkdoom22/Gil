@@ -1,6 +1,6 @@
 _addon.name = "Gil"
 _addon.author = "Uwu/Darkdoom"
-_addon.versioin = "lol"
+_addon.version = "lol"
 
 texts = require 'texts'
 require('default_settings')
