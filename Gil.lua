@@ -63,7 +63,7 @@ function Display_Box()
     
     local name = Get_Name()
     
-    new_text = "              ~ Gil~ \n" .. name .. ": " .. gil .. "\n" .. full_string .. "\n"
+    new_text = "              ~ Gil ~ \n" .. name .. ": " .. gil .. "\n" .. full_string .. "\n"
   
   end
 
