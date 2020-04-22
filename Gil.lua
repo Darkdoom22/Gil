@@ -48,7 +48,7 @@ windower.register_event('ipc message', function(msg)
   full_string = ""
   
   if not has_value(Gils, msg) then
-   
+    Gils = {}
     table.insert(Gils, msg)    
    
   end
