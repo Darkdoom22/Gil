@@ -1,6 +1,6 @@
 _addon.name = "Gil"
 _addon.author = "Uwu/Darkdoom"
-_addon.version = "lol.1"
+_addon.version = "lol.2"
 
 texts = require 'texts'
 require('default_settings')
@@ -48,11 +48,19 @@ windower.register_event('ipc message', function(msg)
   full_string = ""
   
   if not has_value(Gils, msg) then
-    Gils = {}
+    
     table.insert(Gils, msg)    
-   
+    
   end
   
+    for k,v in pairs(Gils) do
+      
+      if msg:sub(-7) ~= Gils[k]:sub(-7) and msg:sub(1, 3) == Gils[k]:sub(1, 3) then
+        table.remove(Gils, k)
+      end
+      
+    end
+    
 end)
   
 
