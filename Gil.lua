@@ -1,6 +1,6 @@
 _addon.name = "Gil"
 _addon.author = "Uwu/Darkdoom"
-_addon.version = "lol.2"
+_addon.version = "lol.3"
 
 texts = require 'texts'
 require('default_settings')
@@ -11,13 +11,20 @@ text_box = texts.new(settings.player)
 Timer = os.clock()
 Gils = {}
 
+function lpad(str, len, char)
+  if char == nil then char = ' ' end
+  return string.rep(char, len - #str) .. str
+end
+
+
 function Get_Gil()
   
   local items = windower.ffxi.get_items()
   local gil = items.gil
   local name = Get_Name()
-  
-  windower.send_ipc_message(name .. ": " .. comma_value(gil))
+  local pad =  24 - string.len(name)
+  local gil_string = lpad(comma_value(gil), pad, ' ')
+  windower.send_ipc_message(name .. ": " .. gil_string)
   
   return comma_value(gil)
   
@@ -55,7 +62,7 @@ windower.register_event('ipc message', function(msg)
   
     for k,v in pairs(Gils) do
       
-      if msg:sub(-7) ~= Gils[k]:sub(-7) and msg:sub(1, 3) == Gils[k]:sub(1, 3) then
+      if msg:sub(-9) ~= Gils[k]:sub(-9) and msg:sub(1, 3) == Gils[k]:sub(1, 3) then
         table.remove(Gils, k)
       end
       
@@ -70,8 +77,9 @@ function Display_Box()
   if gil ~= nil then
     
     local name = Get_Name()
-    
-    new_text = "              ~ Gil ~ \n" .. name .. ": " .. gil .. "\n" .. full_string .. "\n"
+    local pad =  24 - string.len(name)
+    local local_string = lpad(gil, pad, ' ')
+    new_text = "              ~ Gil ~ \n" .. name .. ": " .. local_string .. "\n" .. full_string .. "\n"
   
   end
 
