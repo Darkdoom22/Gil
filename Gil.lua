@@ -71,26 +71,36 @@ windower.register_event('ipc message', function(msg)
 end)
   
 
-function Display_Box()
-  
-  full_string = table.concat(Gils,"\n")
-  if gil ~= nil then
-    
-    local name = Get_Name()
-    local pad =  24 - string.len(name)
-    local local_string = lpad(gil, pad, ' ')
-    new_text = "              ~ Gil ~ \n" .. name .. ": " .. local_string .. "\n" .. full_string .. "\n"
-  
-  end
-
-  if new_text ~= nil then
-    
-    text_box:text(new_text)
-    text_box:visible(true)
-    
-  end
-  
+function Get_Gil_Amount(msg)
+    local amount_with_comma = msg:match(": (.+)$")
+    local amount = amount_with_comma:gsub(",", "")
+    return tonumber(amount)
 end
+
+function Get_Total_Gil()
+    local total_gil = 0
+    for _, msg in pairs(Gils) do
+        total_gil = total_gil + Get_Gil_Amount(msg)
+    end
+    return comma_value(total_gil)
+end
+
+function Display_Box()
+    full_string = table.concat(Gils, "\n")
+    if gil ~= nil then
+        local name = Get_Name()
+        
+        local total_gil = Get_Total_Gil()  -- Get the total gil amount
+        
+        new_text = "              ~ Gil ~ \n" .. name .. ": " .. gil .. "\n" .. full_string .. "\nTotal: " .. total_gil .. "\n"
+    end
+
+    if new_text ~= nil then
+        text_box:text(new_text)
+        text_box:visible(true)
+    end
+end
+
 
 function comma_value(amount)
   local formatted = amount
